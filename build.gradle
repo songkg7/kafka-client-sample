@@ -1,0 +1,59 @@
+buildscript {
+    ext {
+        springBootVersion = '2.7.0'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+    }
+}
+
+// 하위 모든 프로젝트 공통 세팅
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = 'com.example'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '11'
+
+    repositories {
+        mavenCentral()
+    }
+
+    // 하위 모듈에서 공통으로 사용하는 세팅 추가
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+
+        annotationProcessor 'org.projectlombok:lombok'
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.apache.kafka:kafka-streams'
+        implementation 'org.springframework.kafka:spring-kafka'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.kafka:spring-kafka-test'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+project(':producer') {
+    bootJar { enabled = true }
+    jar { enabled = false }
+}
+
+project(':consumer') {
+    bootJar { enabled = true }
+    jar { enabled = false }
+}

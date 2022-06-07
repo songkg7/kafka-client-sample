@@ -1,0 +1,3 @@
+rootProject.name = 'kafka-client-sample'
+include 'producer'
+include 'consumer'
