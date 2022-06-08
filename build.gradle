@@ -57,3 +57,8 @@ project(':consumer') {
     bootJar { enabled = true }
     jar { enabled = false }
 }
+
+project(':custom-consumer') {
+    bootJar { enabled = true }
+    jar { enabled = false }
+}

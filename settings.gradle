@@ -1,3 +1,4 @@
 rootProject.name = 'kafka-client-sample'
 include 'producer'
 include 'consumer'
+include 'custom-consumer'
