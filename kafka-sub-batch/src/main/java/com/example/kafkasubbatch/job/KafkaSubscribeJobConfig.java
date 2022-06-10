@@ -1,5 +1,6 @@
 package com.example.kafkasubbatch.job;
 
+import java.util.HashMap;
 import java.util.Properties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +51,7 @@ public class KafkaSubscribeJobConfig {
                 .name("kafkaItemReader")
                 .topic("test")
                 .partitions(0)
+                .partitionOffsets(new HashMap<>())
                 .consumerProperties(properties)
                 .build();
     }
