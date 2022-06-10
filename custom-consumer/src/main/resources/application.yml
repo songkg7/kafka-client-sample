@@ -5,4 +5,4 @@ spring:
     bootstrap-servers:
       - localhost:9092
     consumer:
-      group-id: kafka-intro
+      group-id: string-stream

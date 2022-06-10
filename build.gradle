@@ -62,3 +62,13 @@ project(':custom-consumer') {
     bootJar { enabled = true }
     jar { enabled = false }
 }
+
+project(':kafka-sub-batch') {
+    bootJar { enabled = true }
+    jar { enabled = false }
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-batch'
+        implementation 'com.h2database:h2'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    }
+}
