@@ -1,5 +1,7 @@
 package com.example.kafkasubbatch.job;
 
+import com.example.kafkasubbatch.processor.PersonIntroduceProcessor;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Properties;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +43,7 @@ public class KafkaJobConfig {
         return stepBuilderFactory.get("step1")
                 .<String, String>chunk(5)
                 .reader(kafkaItemReader())
+                .processor(personIntroduceProcessor())
                 .writer(kafkaItemWriter())
                 .build();
     }
@@ -52,10 +55,11 @@ public class KafkaJobConfig {
 
         return new KafkaItemReaderBuilder<String, String>()
                 .name("kafkaItemReader")
-                .topic("test")
+                .topic("input")
                 .partitions(0)
                 .partitionOffsets(new HashMap<>())
                 .consumerProperties(properties)
+                .pollTimeout(Duration.ofMinutes(3))
                 .build();
     }
 
@@ -67,4 +71,8 @@ public class KafkaJobConfig {
                 .build();
     }
 
+    @Bean
+    PersonIntroduceProcessor personIntroduceProcessor() {
+        return new PersonIntroduceProcessor();
+    }
 }
