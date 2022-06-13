@@ -72,3 +72,14 @@ project(':kafka-sub-batch') {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     }
 }
+
+project(':kafka-streams') {
+    bootJar { enabled = true }
+    jar { enabled = false }
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-batch'
+        implementation 'com.h2database:h2'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.apache.kafka:kafka-streams:3.2.0'
+    }
+}
