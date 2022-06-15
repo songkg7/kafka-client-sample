@@ -4,3 +4,5 @@ include 'consumer'
 include 'custom-consumer'
 include 'kafka-sub-batch'
 include 'kafka-streams'
+include 'kafka-streams-v2'
+

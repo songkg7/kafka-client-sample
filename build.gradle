@@ -86,3 +86,8 @@ project(':kafka-streams') {
         implementation 'org.apache.kafka:kafka-streams'
     }
 }
+
+project(':kafka-streams-v2') {
+    bootJar { enabled = true }
+    jar { enabled = false }
+}
